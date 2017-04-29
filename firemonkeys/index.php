@@ -69,16 +69,8 @@ desired effect
      fixed layout. -->
 
 <script src="./resources/cesium/Cesium.js"></script>  
-<script>      
-  var fire24Provider = new Cesium.WebMapTileServiceImageryProvider({
-    url : 'https://firms.modaps.eosdis.nasa.gov/wms/c6/?',
-    layer : 'fires24'
-  });
-  
-  var viewer = new Cesium.Viewer('cesiumContainer',{
-    imageryProvider: fire24Provider,
-    baseLayerPicker : false
-  });
+<script>   
+  var viewer = new Cesium.Viewer('cesiumContainer');
   /*
   var entity = viewer.entities.add({
       position : Cesium.Cartesian3.fromDegrees(-123.0744619, 44.0503706),
@@ -88,18 +80,53 @@ desired effect
   });
   viewer.trackedEntity = entity;
   */
-
   //MODIS Hotspots
   var fire24Provider = new Cesium.WebMapServiceImageryProvider({
     url : 'https://firms.modaps.eosdis.nasa.gov/wms/c6/?',
-    layers : 'fires24'
+    layers : 'fires24',
+      parameters: {
+      format: 'image/png',
+      transparent: true
+    },
+    proxy : {
+        getURL : function(url) {
+            return '/firemonkeys/proxy.php?url=' + encodeURIComponent(url);
+        }
+    }
+  
   });
-  viewer.imageryLayers.addImageryProvider(fire24Provider, 1);
   var fire48Provider = new Cesium.WebMapServiceImageryProvider({
     url : 'https://firms.modaps.eosdis.nasa.gov/wms/c6/?',
-    layers : 'fires48'
+    layers : 'fires48',
+      parameters: {
+        format: 'image/png',
+        transparent: true
+    },
+    proxy : {
+        getURL : function(url) {
+            return '/firemonkeys/proxy.php?url=' + encodeURIComponent(url);
+        }
+    }
   });
-  viewer.imageryLayers.addImageryProvider(fire48Provider, 2);
+
+  var focosConaeProvider = new Cesium.WebMapServiceImageryProvider({
+    url : 'https://focosdecalor.conae.gov.ar/geoserver/wms',
+    layers : 'FocosDeCalor',
+        parameters: {
+            format: 'image/png',
+            transparent: true,
+
+    },
+    proxy : {
+        getURL : function(url) {
+            return '/firemonkeys/proxy.php?url=' + encodeURIComponent(url);
+        }
+    }
+  });
+  viewer.imageryLayers.addImageryProvider(focosConaeProvider);
+  viewer.imageryLayers.addImageryProvider(fire48Provider);
+  viewer.imageryLayers.addImageryProvider(fire24Provider);
+  
 </script>
 
 </body>
