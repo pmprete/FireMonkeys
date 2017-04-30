@@ -30,10 +30,11 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header">HEADER</li>
+        <li class="header">Menu</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        <li><a href="/firemonkeys/"><i class="fa fa-map"></i> <span>Map</span></a></li>
+        <li><a href="/firemonkeys/stats.php"><i class="fa fa-flag"></i> <span>Wind Forecast</span></a></li>
+        <li><a href="/firemonkeys/weather.php"><i class="fa fa-cloud"></i> <span>Weather Forecast</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">
