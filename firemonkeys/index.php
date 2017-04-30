@@ -68,7 +68,7 @@ desired effect
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
-<script src="./resources/js/plugins/slimScroll/jquery.slimscroll.js"></script>
+<script src="./resources/plugins/slimScroll/jquery.slimscroll.js"></script>
 
 <script src="./resources/js/moment.js"></script>
 <script src="./resources/cesium/Cesium.js"></script>  
