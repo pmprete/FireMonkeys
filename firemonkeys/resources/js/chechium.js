@@ -7,7 +7,7 @@ Chechium.polyline;
 Chechium.polylinePositions = [];
 
 function createLayerForMenu(service){
-    return '<li><a href="#" onclick=switchLayer('+service.id+')><i class="menu-icon fa fa-birthday-cake bg-red"></i><div class="menu-info"><h4 class="control-sidebar-subheading">'+service.name+'</h4><p>'+service.description+'</p></div></a></li>';
+    return '<li><a href="#" onclick=switchLayer('+service.id+')><i class="menu-icon fa fa-map bg-red"></i><div class="menu-info"><h4 class="control-sidebar-subheading">'+service.name+'</h4><p>'+service.description+'</p></div></a></li>';
 }
 
 function switchLayer(id) { 
