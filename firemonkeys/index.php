@@ -27,7 +27,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue fixed sidebar-mini">
 <div class="wrapper">
 
   <?php include ('header.php');?>
@@ -37,13 +37,14 @@ desired effect
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
-    <!-- Main content -->
-    <section class="content">
+        <!-- Main content -->
+        <section class="content">
 
-        <div id="cesiumContainer"></div>
+            <div id="cesiumContainer"></div>
 
-    </section>
-    <!-- /.content -->
+        </section>
+        <!-- /.content -->
+        
     </div>
     <!-- /.content-wrapper -->
 
@@ -68,7 +69,7 @@ desired effect
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
-<script src="./resources/js/plugins/slimScroll/jquery.slimscroll.js"></script>
+<script src="./resources/plugins/slimScroll/jquery.slimscroll.js"></script>
 
 <script src="./resources/js/moment.js"></script>
 <script src="./resources/cesium/Cesium.js"></script>  

@@ -6,34 +6,42 @@ Chechium.drawing = false;
 Chechium.polyline;
 Chechium.polylinePositions = [];
 
-function createLayerForMenu(service){
-    return '<li><a href="#" onclick=switchLayer('+service.id+')><i class="menu-icon fa fa-birthday-cake bg-red"></i><div class="menu-info"><h4 class="control-sidebar-subheading">'+service.name+'</h4><p>'+service.description+'</p></div></a></li>';
+Chechium.layers = [];
+
+
+function createLayerForMenu(service) {
+    return '<li><a href="#" onclick=switchLayer("'+service.id+'")><i id="icon-indicator-'+service.id+'"class="menu-icon fa fa-birthday-cake bg-red"></i><div class="menu-info"><h4 class="control-sidebar-subheading">'+service.name+'</h4><p>'+service.description+'</p></div></a></li>';
 }
 
 function switchLayer(id) { 
-    Chechium.viewer.imageryLayers.get(id).show = !Chechium.viewer.imageryLayers.get(id).show;
+    //Chechium.viewer.imageryLayers.raiseToTop(Chechium.viewer.imageryLayers.get(id));
+    Chechium.viewer.imageryLayers.get(id).show = !Chechium.viewer.imageryLayers.get(id).show;    
+    $('#icon-indicator-' + id).removeClass("bg-red");
+    $('#icon-indicator-' + id).removeClass("bg-green");
+    if (Chechium.viewer.imageryLayers.get(id).show) {
+        $('#icon-indicator-' + id).addClass("bg-green");
+    } else { 
+        $('#icon-indicator-' + id).addClass("bg-red");
+    }
+        
+    console.log(Chechium.viewer.imageryLayers.get(id));
 }
-Chechium.newViewer = function () { 
-    //load imageryProviderViewModels
-    var models = [];
-    var providers = [];
 
-    ChechiumConfig.wms.forEach(function (service, index) {
-        var provider = Chechium.getWMSProvider(service);
-        providers.push(provider);
-        service.id = index;
-        var menuItem = createLayerForMenu(service);
-        $("#layers-sidebar-menu").append(menuItem);
-    });
-    
+Chechium.newViewer = function () {     
     //create viewer    
     Chechium.viewer = new Cesium.Viewer('cesiumContainer');
 
-    providers.forEach(function (provider, index) {
-        Chechium.viewer.imageryLayers.addImageryProvider(provider, index);
-    });
+    ChechiumConfig.wms.forEach(function (service, index) {
+        service.id = index+1;
+        var provider = Chechium.getWMSProvider(service);
+        var layer = new Cesium.ImageryLayer(provider);
+        layer.show = false;
+        Chechium.layers.push(layer);
+        Chechium.viewer.imageryLayers.addImageryProvider(provider, service.id);
+        var menuItem = createLayerForMenu(service);
+        $("#layers-sidebar-menu").append(menuItem);
+    }); 
     
-
     //for drawing
     Chechium.polyline = Chechium.viewer.entities.add({
         polyline: {
@@ -105,27 +113,10 @@ Chechium.drawLeftClickHanlder = function (click) {
         });
         Chechium.viewer.entities.remove(Chechium.polyline);
         Chechium.polylinePositions = [];
-    } /*else {
-        Chechium.polyline = Chechium.viewer.entities.add({
-            polyline: {
-                positions: new Cesium.CallbackProperty(function () {
-                    return Chechium.polylinePositions;
-                }, false)
-            }
-        });
-    }*/
+    }
     Chechium.drawing = !Chechium.drawing;
     if (!Chechium.drawingModeEnabled) { 
         Chechium.drawingModeEnabled = !Chechium.drawingModeEnabled;
-    }
-};
-
-/**
- * Proxy to avoid CORS
- */
-Chechium.proxy = {
-    getURL: function (url) {
-        return '/firemonkeys/proxy.php?url=' + encodeURIComponent(url);
     }
 };
 
@@ -156,6 +147,12 @@ Chechium.getWMSProvider = function (options) {
         parameters: parameters,
         proxy: Chechium.proxy
     });
+};
+
+Chechium.proxy = {
+    getURL: function (url) {
+        return '/firemonkeys/proxy.php?url=' + encodeURIComponent(url);
+    }
 };
 
 Chechium.newEntity = function (options) {
