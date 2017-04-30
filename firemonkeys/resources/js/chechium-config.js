@@ -12,6 +12,7 @@ var ChechiumConfig = {
     layer: "ndfd.oceanic.windspd.windbarbs"
     },
   */
+  /*
   {
     name: "MODIS Hotspots for the past 24 hours.",
     icon: "./resources/img/firms.png",
@@ -60,6 +61,6 @@ var ChechiumConfig = {
     description: "Ultimos Focos de Calor (NPP). CONAE.",
     url: "http://geoservicios.conae.gov.ar/geoserver/GeoServiciosCONAE/wms?",
     layer: "GeoServiciosCONAE:FocosDeCalor"
-  }
+  }*/
   ]
 };
