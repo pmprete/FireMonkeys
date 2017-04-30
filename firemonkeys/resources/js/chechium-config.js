@@ -1,11 +1,18 @@
 var ChechiumConfig = {
   wms: [
      {
-    name: "Vegetation Index [NDVI] 2000+ (MODIS)",
-    icon: "./resources/img/wind.png",
-    description: "Vegetation Index [NDVI] 2000+ (MODIS) from NASA Earth Observations (NEO).",
-    url: "https://neo.sci.gsfc.nasa.gov/wms/wms?",
-    layer: "MOD13A2_M_NDVI"
+      name: "Vegetation Index [NDVI] 2000+ (MODIS)",
+      icon: "./resources/img/wind.png",
+      description: "Vegetation Index [NDVI] 2000+ (MODIS) from NASA Earth Observations (NEO).",
+      url: "https://neo.sci.gsfc.nasa.gov/wms/wms?",
+      layer: "MOD13A2_M_NDVI"
+     },
+    {
+      name: "Outgoing Longwave Radiation",
+      icon: "./resources/img/wind.png",
+      description: "Outgoing Longwave Radiation (1 month)",
+      url: "https://neo.sci.gsfc.nasa.gov/wms/wms?",
+      layer: "CERES_LWFLUX_M"
     },
  
   /*
