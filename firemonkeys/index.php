@@ -70,6 +70,7 @@ desired effect
 
 <script src="./resources/cesium/Cesium.js"></script>  
 <script>   
+
   var viewer = new Cesium.Viewer('cesiumContainer');
   /*
   var entity = viewer.entities.add({
@@ -95,6 +96,23 @@ desired effect
     }
   
   });
+
+    var windProvider = new Cesium.WebMapServiceImageryProvider({
+    url : 'https://digital.weather.gov/wms.php?',
+    layers : 'ndfd.conus.windspd.windbarbs',
+      parameters: {
+      format: 'image/png',
+      transparent: true,
+      srs: 'EPSG:3857'
+    },
+    proxy : {
+        getURL : function(url) {
+            return '/firemonkeys/proxy.php?url=' + encodeURIComponent(url);
+        }
+    }
+  
+  });
+
   var fire48Provider = new Cesium.WebMapServiceImageryProvider({
     url : 'https://firms.modaps.eosdis.nasa.gov/wms/c6/?',
     layers : 'fires48',
@@ -123,10 +141,13 @@ desired effect
         }
     }
   });
-  viewer.imageryLayers.addImageryProvider(focosConaeProvider);
-  viewer.imageryLayers.addImageryProvider(fire48Provider);
-  viewer.imageryLayers.addImageryProvider(fire24Provider);
+
+//   viewer.imageryLayers.addImageryProvider(focosConaeProvider);
+//   viewer.imageryLayers.addImageryProvider(fire48Provider);
+//   viewer.imageryLayers.addImageryProvider(fire24Provider);
+  viewer.imageryLayers.addImageryProvider(windProvider);
   
+
 </script>
 
 </body>

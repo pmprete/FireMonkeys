@@ -4,9 +4,9 @@
   <!-- Logo -->
   <a href="index2.html" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini"><b>A</b>LT</span>
+    <span class="logo-mini"><b>Fire</b>Monkey</span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>Admin</b>LTE</span>
+    <span class="logo-lg"><b>Fire</b>Monkey</span>
   </a>
 
   <!-- Header Navbar -->
@@ -23,33 +23,30 @@
           <!-- Menu toggle button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-envelope-o"></i>
-            <span class="label label-success">4</span>
+            <span class="label label-success">1</span>
           </a>
           <ul class="dropdown-menu">
-            <li class="header">You have 4 messages</li>
+            <li class="header">You have 1 message</li>
             <li>
               <!-- inner menu: contains the messages -->
               <ul class="menu">
                 <li><!-- start message -->
                   <a href="#">
-                    <div class="pull-left">
-                      <!-- User Image -->
-                      <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                    </div>
+                    
                     <!-- Message title and timestamp -->
                     <h4>
-                      Support Team
+                      New forecast
                       <small><i class="fa fa-clock-o"></i> 5 mins</small>
                     </h4>
                     <!-- The message -->
-                    <p>Why not buy a new awesome theme?</p>
+                    <p>Wind change in Salta increases fire</p>
                   </a>
                 </li>
                 <!-- end message -->
               </ul>
               <!-- /.menu -->
             </li>
-            <li class="footer"><a href="#">See All Messages</a></li>
+            <li class="footer"><a href="#">View all Messages</a></li>
           </ul>
         </li>
         <!-- /.messages-menu -->
@@ -59,22 +56,22 @@
           <!-- Menu toggle button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-bell-o"></i>
-            <span class="label label-warning">10</span>
+            <span class="label label-warning">3</span>
           </a>
           <ul class="dropdown-menu">
-            <li class="header">You have 10 notifications</li>
+            <li class="header">There are 3 posible outbreaks</li>
             <li>
               <!-- Inner Menu: contains the notifications -->
               <ul class="menu">
                 <li><!-- start notification -->
                   <a href="#">
-                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                    <i class="fa fa-lightbulb-o text-yellow"></i> Posible fire outbreak at Bariloche
                   </a>
                 </li>
                 <!-- end notification -->
               </ul>
             </li>
-            <li class="footer"><a href="#">View all</a></li>
+            <li class="footer"><a href="#">View All</a></li>
           </ul>
         </li>
         <!-- Tasks Menu -->
@@ -82,10 +79,10 @@
           <!-- Menu Toggle Button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-flag-o"></i>
-            <span class="label label-danger">9</span>
+            <span class="label label-danger">1</span>
           </a>
           <ul class="dropdown-menu">
-            <li class="header">You have 9 tasks</li>
+            <li class="header">There are active fires</li>
             <li>
               <!-- Inner menu: contains the tasks -->
               <ul class="menu">
@@ -93,14 +90,14 @@
                   <a href="#">
                     <!-- Task title and progress text -->
                     <h3>
-                      Design some buttons
-                      <small class="pull-right">20%</small>
+                      Current state: Red Alert!
+                      <small class="pull-right">70%</small>
                     </h3>
                     <!-- The progress bar -->
                     <div class="progress xs">
                       <!-- Change the css width attribute to simulate progress -->
-                      <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                        <span class="sr-only">20% Complete</span>
+                      <div class="progress-bar progress-bar-red" style="width: 70%" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                        <span class="sr-only">70%</span>
                       </div>
                     </div>
                   </a>
@@ -109,7 +106,7 @@
               </ul>
             </li>
             <li class="footer">
-              <a href="#">View all tasks</a>
+              <a href="#">View all fires</a>
             </li>
           </ul>
         </li>
@@ -136,10 +133,10 @@
             <li class="user-body">
               <div class="row">
                 <div class="col-xs-4 text-center">
-                  <a href="#">Followers</a>
+                  <a href="#">Messages</a>
                 </div>
                 <div class="col-xs-4 text-center">
-                  <a href="#">Sales</a>
+                  <a href="#">Timeline</a>
                 </div>
                 <div class="col-xs-4 text-center">
                   <a href="#">Friends</a>

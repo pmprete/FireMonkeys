@@ -16,6 +16,8 @@
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect.
   -->
+
+  <script src="//cdn.plot.ly/plotly-latest.min.js"></script>
   <link rel="stylesheet" href="./resources/css/skins/skin-blue.min.css">
 
   <style>
