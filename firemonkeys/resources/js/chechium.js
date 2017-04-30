@@ -6,38 +6,35 @@ Chechium.drawing = false;
 Chechium.polyline;
 Chechium.polylinePositions = [];
 
+function createLayerForMenu(service){
+    return '<li><a href="#" onclick=switchLayer('+service.id+')><i class="menu-icon fa fa-birthday-cake bg-red"></i><div class="menu-info"><h4 class="control-sidebar-subheading">'+service.name+'</h4><p>'+service.description+'</p></div></a></li>';
+}
+
+function switchLayer(id) { 
+    Chechium.viewer.imageryLayers.get(id).show = !Chechium.viewer.imageryLayers.get(id).show;
+}
 Chechium.newViewer = function () { 
     //load imageryProviderViewModels
     var models = [];
     var providers = [];
+
     ChechiumConfig.wms.forEach(function (service, index) {
         var provider = Chechium.getWMSProvider(service);
-        var model = new Cesium.ProviderViewModel({
-            name: service.name,
-            tooltip: service.description,
-            iconUrl: service.icon,
-            creationFunction: function() {
-                return provider;
-            }
-        });
         providers.push(provider);
-        models.push(model); 
+        service.id = index;
+        var menuItem = createLayerForMenu(service);
+        $("#layers-sidebar-menu").append(menuItem);
     });
     
     //create viewer    
-    Chechium.viewer = new Cesium.Viewer('cesiumContainer', /*{
-        // no permite superponer capas...
-        // cambiar por http://cesiumjs.org/Cesium/Apps/Sandcastle/index.html?src=Imagery%20Layers%20Manipulation.html&label=Showcases
-        imageryProviderViewModels: models
-    }*/);
-    
-    var bing = new Cesium.BingMapsImageryProvider({
-        url: 'https://dev.virtualearth.net',
-        key: "AqMkSLS6dI40Hj0aKnFokBw1zfgwsW7aIohyODaebG7LCEK0P2eMEqfX6t4O11dq",
-        mapStyle: Cesium.BingMapsStyle.AERIAL
+    Chechium.viewer = new Cesium.Viewer('cesiumContainer');
+
+    providers.forEach(function (provider, index) {
+        Chechium.viewer.imageryLayers.addImageryProvider(provider, index);
     });
-    Chechium.viewer.imageryLayers.addImageryProvider(bing);
     
+
+    //for drawing
     Chechium.polyline = Chechium.viewer.entities.add({
         polyline: {
             positions: new Cesium.CallbackProperty(function () {
