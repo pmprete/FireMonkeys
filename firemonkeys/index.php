@@ -50,6 +50,7 @@ desired effect
     <?php include ('footer.php');?>
   
     <?php include ('sidebar.php');?>
+
  </div>
 <!-- ./wrapper -->
 
@@ -62,15 +63,18 @@ desired effect
 <!-- AdminLTE App -->
 <script src="./resources/js/app.min.js"></script>
 
+
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
+<script src="./resources/js/plugins/slimScroll/jquery.slimscroll.js"></script>
 
 <script src="./resources/js/moment.js"></script>
 <script src="./resources/cesium/Cesium.js"></script>  
 <script src="./resources/js/chechium.js"></script>
 <script src="./resources/js/chechium-config.js"></script>
+
 <script>   
     Chechium.newViewer();
     Chechium.drawing = true;
@@ -254,6 +258,7 @@ function enableDrawing(){
     Chechium.drawingModeEnabled = true;
     Chechium.drawing = false;
 };
+
 </script>
 </body>
 </html>
