@@ -259,6 +259,11 @@ function enableDrawing(){
     Chechium.drawingModeEnabled = true;
     Chechium.drawing = false;
 };
+function stopDrawing(){
+    Chechium.drawingModeEnabled = false;
+    Chechium.drawing = false;
+    Chechium.viewer.entities.removeAll();
+};
 
 </script>
 </body>
