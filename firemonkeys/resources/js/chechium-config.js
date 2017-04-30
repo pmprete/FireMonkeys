@@ -1,5 +1,13 @@
 var ChechiumConfig = {
   wms: [
+     {
+    name: "Vegetation Index [NDVI] 2000+ (MODIS)",
+    icon: "./resources/img/wind.png",
+    description: "Vegetation Index [NDVI] 2000+ (MODIS) from NASA Earth Observations (NEO).",
+    url: "https://neo.sci.gsfc.nasa.gov/wms/wms?",
+    layer: "MOD13A2_M_NDVI"
+    },
+ 
   /*
   {
     name: "Wind barbs",
