@@ -50,7 +50,6 @@ desired effect
     <?php include ('footer.php');?>
   
     <?php include ('sidebar.php');?>
-
  </div>
 <!-- ./wrapper -->
 
@@ -74,6 +73,7 @@ desired effect
 <script src="./resources/js/chechium-config.js"></script>
 <script>   
     Chechium.newViewer();
+    Chechium.drawing = true;
     /*
     var entity = Chechium.newEntity({
         lat: -34.6083,
@@ -250,7 +250,10 @@ dataSourcePromise.then(function(dataSource){
     window.alert(error);
 });
 
+function enableDrawing(){
+    Chechium.drawingModeEnabled = true;
+    Chechium.drawing = false;
+};
 </script>
-
 </body>
 </html>

@@ -35,6 +35,7 @@
         <li><a href="/firemonkeys/"><i class="fa fa-map"></i> <span>Map</span></a></li>
         <li><a href="/firemonkeys/stats.php"><i class="fa fa-flag"></i> <span>Wind Forecast</span></a></li>
         <li><a href="/firemonkeys/weather.php"><i class="fa fa-cloud"></i> <span>Weather Forecast</span></a></li>
+        <li><a href="#" onclick="enableDrawing()"><i class="fa fa-pencil"></i> <span>Draw</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">

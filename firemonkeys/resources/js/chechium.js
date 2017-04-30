@@ -1,15 +1,10 @@
-/*
-<script src="./resources/js/chechium.js"></script>  
-<script src="./resources/js/chechium-config.js"></script>  
-<script>
-  Chechium.newViewer();
-  Chechium.loadConfig();
-</script>
-*/
-
-
 var Chechium = Chechium || {};
 Cesium.BingMapsApi.defaultKey = "AqMkSLS6dI40Hj0aKnFokBw1zfgwsW7aIohyODaebG7LCEK0P2eMEqfX6t4O11dq";
+
+Chechium.drawingModeEnabled = false;
+Chechium.drawing = false;
+Chechium.polyline;
+Chechium.polylinePositions = [];
 
 Chechium.newViewer = function () { 
     //load imageryProviderViewModels
@@ -30,21 +25,102 @@ Chechium.newViewer = function () {
     });
     
     //create viewer    
-    Chechium.viewer = new Cesium.Viewer('cesiumContainer', {
+    Chechium.viewer = new Cesium.Viewer('cesiumContainer', /*{
         // no permite superponer capas...
         // cambiar por http://cesiumjs.org/Cesium/Apps/Sandcastle/index.html?src=Imagery%20Layers%20Manipulation.html&label=Showcases
         imageryProviderViewModels: models
-    });
-    /*
+    }*/);
+    
     var bing = new Cesium.BingMapsImageryProvider({
         url: 'https://dev.virtualearth.net',
         key: "AqMkSLS6dI40Hj0aKnFokBw1zfgwsW7aIohyODaebG7LCEK0P2eMEqfX6t4O11dq",
         mapStyle: Cesium.BingMapsStyle.AERIAL
     });
     Chechium.viewer.imageryLayers.addImageryProvider(bing);
-    */
-    //create handler for future clicks    
+    
+    Chechium.polyline = Chechium.viewer.entities.add({
+        polyline: {
+            positions: new Cesium.CallbackProperty(function () {
+                return Chechium.polylinePositions;
+            }, false)
+        }
+    });
+
+    //left click handler
     Chechium.handler = new Cesium.ScreenSpaceEventHandler(Chechium.viewer.scene.canvas);
+    var ellipsoid = Chechium.viewer.scene.globe.ellipsoid;
+    var camera = Chechium.viewer.camera;
+    Chechium.handler.setInputAction(function (click) {
+        var cartesian = camera.pickEllipsoid(click.position, ellipsoid);
+        
+        if (cartesian) {
+            //draw hanlder
+            if (Chechium.drawingModeEnabled) {
+                Chechium.drawLeftClickHanlder(click);
+            }
+
+            var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+            if (Chechium.leftClickHandler) { 
+                Chechium.leftClickHandler({ 
+                    longitude: Cesium.Math.toDegrees(cartographic.longitude),
+                    latitude: Cesium.Math.toDegrees(cartographic.latitude)
+                });
+            }
+        }        
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK);    
+    
+    //right click handler
+    Chechium.handler.setInputAction(function (click) {
+        var cartesian = camera.pickEllipsoid(click.position, ellipsoid);        
+        if (cartesian) {
+            var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+            if (Chechium.rightClickHandler) { 
+                Chechium.rightClickHandler({ 
+                    longitude:  Cesium.Math.toDegrees(cartographic.longitude),
+                    latitude: Cesium.Math.toDegrees(cartographic.latitude)
+                });
+            }
+        }
+    }, Cesium.ScreenSpaceEventType.right_CLICK);    
+
+      Chechium.handler.setInputAction(Chechium.drawMoveHandler, Cesium.ScreenSpaceEventType.MOUSE_MOVE
+  );
+
+};
+
+Chechium.drawMoveHandler = function (movement) {
+    if (!Chechium.drawingModeEnabled) return;
+    
+    var surfacePosition = Chechium.viewer.camera.pickEllipsoid(movement.endPosition);
+    if (Chechium.drawing && Cesium.defined(surfacePosition)) {
+        Chechium.polylinePositions.push(surfacePosition);
+    }
+};
+Chechium.drawLeftClickHanlder = function (click) {
+    if (Chechium.drawing) {
+        Chechium.viewer.entities.add({
+            polygon: {
+                hierarchy: {
+                    positions: Chechium.polylinePositions
+                },
+                outline: true
+            }
+        });
+        Chechium.viewer.entities.remove(Chechium.polyline);
+        Chechium.polylinePositions = [];
+    } /*else {
+        Chechium.polyline = Chechium.viewer.entities.add({
+            polyline: {
+                positions: new Cesium.CallbackProperty(function () {
+                    return Chechium.polylinePositions;
+                }, false)
+            }
+        });
+    }*/
+    Chechium.drawing = !Chechium.drawing;
+    if (!Chechium.drawingModeEnabled) { 
+        Chechium.drawingModeEnabled = !Chechium.drawingModeEnabled;
+    }
 };
 
 /**
@@ -56,26 +132,14 @@ Chechium.proxy = {
     }
 };
 
-Chechium.layerClick = function () {    
-    Chechium.handler.setInputAction(function(click) {
-        var pickedObject = viewer.scene.pick(click.position);
-        if (Cesium.defined(pickedObject)) {
-            var entityId = pickedObject.id._id;
-            var oldColor = buildingMap.get(entityId).polygon.material.color;
-            buildingMap.get(entityId).polygon.material.color = pickColor;
-            selectedEntity.set(entityId, oldColor);
-
-            var currentLayer = viewer.scene.imageryLayers.get(1);
-            if (typeof currentLayer !== 'undefined') {
-                var info = currentLayer.imageryProvider.pickFeatures(click.position.x, click.position.y);
-                console.log(info);
-                Cesium.when(info, function (result) { 
-                    console.log(result);
-                })
-            }
-        }
-    }, Cesium.ScreenSpaceEventType.LEFT_CLICK);    
+Chechium.leftClickHandler = function (position) {    
+    console.log("Left Clicked on", position);
 };
+
+Chechium.rightClickHandler = function (position) {
+    console.log("Right Clicked on", position);
+};
+
 
 Chechium.getWMSProvider = function (options) {
     var parameters = {

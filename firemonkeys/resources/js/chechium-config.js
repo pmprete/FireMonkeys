@@ -1,5 +1,20 @@
 var ChechiumConfig = {
   wms: [
+     {
+      name: "Vegetation Index [NDVI] 2000+ (MODIS)",
+      icon: "./resources/img/wind.png",
+      description: "Vegetation Index [NDVI] 2000+ (MODIS) from NASA Earth Observations (NEO).",
+      url: "https://neo.sci.gsfc.nasa.gov/wms/wms?",
+      layer: "MOD13A2_M_NDVI"
+     },
+    {
+      name: "Outgoing Longwave Radiation",
+      icon: "./resources/img/wind.png",
+      description: "Outgoing Longwave Radiation (1 month)",
+      url: "https://neo.sci.gsfc.nasa.gov/wms/wms?",
+      layer: "CERES_LWFLUX_M"
+    },
+ 
   /*
   {
     name: "Wind barbs",
@@ -12,6 +27,7 @@ var ChechiumConfig = {
     layer: "ndfd.oceanic.windspd.windbarbs"
     },
   */
+  /*
   {
     name: "MODIS Hotspots for the past 24 hours.",
     icon: "./resources/img/firms.png",
@@ -60,6 +76,6 @@ var ChechiumConfig = {
     description: "Ultimos Focos de Calor (NPP). CONAE.",
     url: "http://geoservicios.conae.gov.ar/geoserver/GeoServiciosCONAE/wms?",
     layer: "GeoServiciosCONAE:FocosDeCalor"
-  }
+  }*/
   ]
 };
